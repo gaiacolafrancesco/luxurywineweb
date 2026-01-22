@@ -16,13 +16,19 @@
     <header class="header">
         <div class="header-container">
             <img src="logo.png" alt="Logo" class="logo-img">
-            <nav class="nav">
+            <button class="tendina-btn" onclick="toggleTendina()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav class="nav" id="menu-tendina">
                 <a href="#">home</a>
                 <a href="#">azienda</a>
                 <a href="#">vini</a>
                 <a href="#">shop</a>
                 <a href="#">contatti</a>
             </nav>
+
             <div class="header-spacer"></div>
         </div>
     </header>
@@ -131,30 +137,35 @@
             document.getElementById('modal-overlay').style.display = 'none';
         }
 
+        function toggleTendina() {
+            document.getElementById('menu-tendina').classList.toggle('attiva');
+        }
+
         function validaEInvia() {
             const name = document.getElementById('full-name');
             const email = document.getElementById('user-email');
-            const phone = document.getElementById('user-phone'); // Riferimento telefono
+            const phone = document.getElementById('user-phone');
             const address = document.getElementById('shipping-address');
 
             let isValid = true;
 
-            // Reset errori
             document.querySelectorAll('.modal-error').forEach(e => e.style.opacity = '0');
 
             if (name.value.trim() === "") {
                 document.getElementById('err-name').style.opacity = '1';
                 isValid = false;
             }
+
             if (!email.value.includes("@") || email.value.trim() === "") {
                 document.getElementById('err-email').style.opacity = '1';
                 isValid = false;
             }
-            // Validazione telefono
+
             if (phone.value.trim() === "") {
                 document.getElementById('err-phone').style.opacity = '1';
                 isValid = false;
             }
+
             if (address.value.trim() === "") {
                 document.getElementById('err-shipping').style.opacity = '1';
                 isValid = false;
@@ -168,11 +179,12 @@
 
         window.onclick = function (event) {
             const overlay = document.getElementById('modal-overlay');
-            if (event.target == overlay) {
+            if (event.target === overlay) {
                 chiudiRiquadro();
             }
         }
     </script>
+
 </body>
 
 </html>
